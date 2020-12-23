@@ -2,9 +2,8 @@ import { Router } from 'express';
 import React, { Component } from 'react';
 import { Switch } from 'react-router';
 import '../styles.css';
-import {BrowserRouter as Router, Switch} from "react-router-dom";
 
-class Landing extends Component {
+class Url extends Component {
     constructor(props) {
       super(props);
     }
@@ -19,41 +18,10 @@ class Landing extends Component {
       // create array of <option> tags 
 
     render() {
-     // add event listener to startsession button that invokes event handler
-     // event handler
-      // 1) send a post request to server
-      // 2) when server respodns with url, store this url in state
-      // render a component with the url onto the screen
-
      return(
     
        <div>
-         
-        <div >
-          <h1>Matchflix</h1>
-          <img id="logo" src ="https://mir-s3-cdn-cf.behance.net/project_modules/fs/f2357447098721.5873f49f96f1f.png"></img>
-        </div>
-
-        <div id="startsession">
-          {/* <form action="/startsession" method="POST"> */}
-            <label for="genres">Select a genre:</label>
-            <select name="genres" id="genres">
-              <option value="801369">Action</option>
-              <option value="4698">Animation</option>
-              <option value="48586">Children & Family</option>
-              <option value="31694">Comedy</option>
-              <option value="3979">Critically Acclaimed Films</option>
-              <option value="6839">Documentaries</option>
-              <option value="5763">Drama</option>
-              <option value="8711">Horror</option>
-              <option value="875">Indie</option>
-              <option value="1492">Sci-Fi & Fantasy</option>
-              <option value="46588">Thrillers</option>
-            </select>
-            <input id="startsession" type="submit" value="Start Session"></input>
-          {/* </form> */}
-            {/* <URL component url='state.url'> */}
-        </div>
+        
        </div>
      );
     }
