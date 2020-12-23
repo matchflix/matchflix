@@ -5,6 +5,7 @@ const PORT = 3000;
 
 
 const session = require('./routes/session')
+const movies = require('./routes/movies')
 
 // import controller
 // const controller = require('./controller');
@@ -19,10 +20,10 @@ app.get('/', (req, res) => {
 })
 
 // route associated with our landing page session generation
-app.use('/startsession', session)
+app.use('/startsession', session);
 
 // create route to render second page, make sure ID matches. 
-app.get('/movie')
+app.get('/movies/:id', movies);
 
 // in production mode, we need to serve the index.html page
 // app.get('/', (req, res) => {
