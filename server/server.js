@@ -2,7 +2,9 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const PORT = 3000;
-const pool = require('./model.js');
+
+
+const session = require('./routes/session')
 
 // import controller
 // const controller = require('./controller');
@@ -11,16 +13,16 @@ const pool = require('./model.js');
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-// TEST
+
 app.get('/', (req, res) => {
-  const all = "SELECT * FROM session"
-  pool.query(all).then((response) => {
-    res.status(200).send(response.rows);
-  })
-  .catch((err) => {
-    console.log(err);
-  })
+  res.sendFile(path.join(__dirname, '../client/index.html'));
 })
+
+// route associated with our landing page session generation
+app.use('/startsession', session)
+
+// create route to render second page, make sure ID matches. 
+app.get('/movie')
 
 // in production mode, we need to serve the index.html page
 // app.get('/', (req, res) => {
