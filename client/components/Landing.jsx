@@ -17,9 +17,10 @@ class Landing extends Component {
       console.log(genreSelection);
       const init = {
         method: 'POST',
-        body: JSON.stringify(genreSelection),
+        body: JSON.stringify({genreId: genreSelection}),
+        headers: {'Content-Type': 'application/json'}
       }
-      fetch('/', init)
+      fetch('/startsession', init)
       .then((response) => response.json())
       .then((data) => {
         // use setState to reassign the value of url to the received url that the server sends back
