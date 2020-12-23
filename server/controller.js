@@ -6,7 +6,7 @@ const controller = {};
 // add middleware to generate user ID
 controller.generateSessionID = (req, res, next) => {
   try {
-    // generate ID
+    // generate a MORE UNIQUE ID
     const ID = Math.floor(Math.random() * 100);
     // save to res.locals
     res.locals.id = ID;
