@@ -17,6 +17,10 @@ app.get('/', (req, res) => {
   return res.sendFile(path.resolve(__dirname, '../client/index.html'));
 })
 
+app.post('/', (req, res) => {
+  return res.status(200).json('www.exampleurl.com');
+})
+
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
 })

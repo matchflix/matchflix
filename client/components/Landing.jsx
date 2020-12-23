@@ -1,30 +1,34 @@
-import { Router } from 'express';
 import React, { Component } from 'react';
-import { Switch } from 'react-router';
 import '../styles.css';
-import {BrowserRouter as Router, Switch} from "react-router-dom";
 
 class Landing extends Component {
     constructor(props) {
       super(props);
+      // declare state object
+      // property url and value empty str
+      this.state= {url: ''};
+      this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    //  componentDidMount() {
-    //     const apiUrl= " ";
-    //     fetch(apiUrl) 
-    //     .then((response) => response.json())
-    //     .then((data) =>  )
-    // }
-      // fetch request to Netflix API
-      // create array of <option> tags 
+    handleSubmit(e) {
+      //send a post request to server
+      // send the selected genre in the request
+      const genreSelection = document.querySelector('#genres').value;
+      console.log(genreSelection);
+      const init = {
+        method: 'POST',
+        body: JSON.stringify(genreSelection),
+      }
+      fetch('/', init)
+      .then((response) => response.json())
+      .then((data) => {
+        // use setState to reassign the value of url to the received url that the server sends back
+        // once setState is ran, the component renders
+        this.setState({url: data});
+      });
+    }
 
     render() {
-     // add event listener to startsession button that invokes event handler
-     // event handler
-      // 1) send a post request to server
-      // 2) when server respodns with url, store this url in state
-      // render a component with the url onto the screen
-
      return(
     
        <div>
@@ -35,8 +39,7 @@ class Landing extends Component {
         </div>
 
         <div id="startsession">
-          {/* <form action="/startsession" method="POST"> */}
-            <label for="genres">Select a genre:</label>
+            <label htmlFor="genres">Select a genre:</label>
             <select name="genres" id="genres">
               <option value="801369">Action</option>
               <option value="4698">Animation</option>
@@ -50,9 +53,12 @@ class Landing extends Component {
               <option value="1492">Sci-Fi & Fantasy</option>
               <option value="46588">Thrillers</option>
             </select>
-            <input id="startsession" type="submit" value="Start Session"></input>
-          {/* </form> */}
-            {/* <URL component url='state.url'> */}
+            <button id="startsession" type="button" onClick={this.handleSubmit}>Start Session</button>
+            {/* create a conditional- if the url is not an empty str, display the url to the page using a html tag */}
+            {
+            this.state.url && 
+            <p>Your url: <a href={this.state.url}>{this.state.url}</a></p>
+            }
         </div>
        </div>
      );
