@@ -1,29 +1,29 @@
-import { Router } from 'express';
 import React, { Component } from 'react';
-import { Switch } from 'react-router';
 import '../styles.css';
-import {BrowserRouter as Router, Switch} from "react-router-dom";
 
 class Landing extends Component {
     constructor(props) {
       super(props);
+      // set up state
+      this.state = {url: 'www.google.com'};
+    }
+    // onSubmit event handler
+     // 1) send a post request to server
+     // 2) when server responds with url, store this url in state
+    handleSubmit(event) {
+      const genreSelection = document.querySelector('#genres').value;
+      const init = {
+        method: 'POST',
+        // headers: {'Content-Type': 'application/json'},
+        // mode: 'cors',
+        // cache: 'no-cache',
+        body: JSON.stringify(genreSelection),
+      }
+      fetch('/', init).then((response) => response.json()).then((data) => console.log(data));
+      event.preventDefault();
     }
 
-    //  componentDidMount() {
-    //     const apiUrl= " ";
-    //     fetch(apiUrl) 
-    //     .then((response) => response.json())
-    //     .then((data) =>  )
-    // }
-      // fetch request to Netflix API
-      // create array of <option> tags 
-
     render() {
-     // add event listener to startsession button that invokes event handler
-     // event handler
-      // 1) send a post request to server
-      // 2) when server respodns with url, store this url in state
-      // render a component with the url onto the screen
 
      return(
     
@@ -35,8 +35,10 @@ class Landing extends Component {
         </div>
 
         <div id="startsession">
+          {/* form invokes eventHandler */}
           {/* <form action="/startsession" method="POST"> */}
-            <label for="genres">Select a genre:</label>
+          <form onSubmit={this.handleSubmit}>
+            <label htmlFor="genres">Select a genre:</label>
             <select name="genres" id="genres">
               <option value="801369">Action</option>
               <option value="4698">Animation</option>
@@ -51,8 +53,14 @@ class Landing extends Component {
               <option value="46588">Thrillers</option>
             </select>
             <input id="startsession" type="submit" value="Start Session"></input>
-          {/* </form> */}
-            {/* <URL component url='state.url'> */}
+          </form>
+          {/* URL component that only renders if state.url exists */}
+          {this.state.url !== '' && 
+          <div>
+          <p>Share this link: {this.state.url}</p>
+          <button type="button">Next</button>
+          </div>
+          }
         </div>
        </div>
      );
