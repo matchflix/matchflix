@@ -14,7 +14,7 @@ const controller = require('../controller');
 // recieve GET from frontend
 router.get('/movies/:id', 
   // make GET to API for genre IDS
-  controller.getGenreIds,
+  // controller.getGenreIds,
   // Fetch genre string from DB and find corresponding ID from res.locals
   //controller.getGenreFromDB,
   // Use genre ID to make API call for movie IDS
@@ -22,7 +22,6 @@ router.get('/movies/:id',
   // Make API call for config info
   // controller.getMovieImages,
   (req, res) => {
-    console.log(res.locals.movies)
     // send images back here
     res.status(200).end();
 })
