@@ -21,7 +21,7 @@ controller.saveInDb = (req, res, next) => {
   try {
     // write out SQL command to save session ID from res.locals and genre from req.body
     const ID = res.locals.id;
-    console.log(req.body.genreId)
+    console.log('genre ID: ' + req.body.genreId)
     const genre = req.body;
     const userDataQuery = `INSERT INTO public.user_session (session_id, genre) VALUES ('${ID}', '${genre}');`
     pool.query(userDataQuery).then((result) => {
