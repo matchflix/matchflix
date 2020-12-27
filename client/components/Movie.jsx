@@ -8,6 +8,8 @@ function Movie (props) {
     <h1 className="movie-title"> {props.title} </h1>
     <h2 className="movie-year"> {props.year} </h2>
     <p className="movie-description"> {props.description} </p>
+    <img className="thumbs-up" src="../assets/thumbs-up.png" onClick={() => alert('clicked thumbs up')}></img>
+    <img className="thumbs-down" src="../assets/thumbs-down.png" onClick={() => alert('clicked thumbs down')}></img>
   </div>
   )
 }

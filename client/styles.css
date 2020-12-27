@@ -2,8 +2,14 @@
   height: 100px;
 }
 
+#landing, #movies {
+  border: 5px solid black;
+  margin: 10px;
+}
+
 .movie {
   border: 1px solid black;
+  margin: 10px;
 }
 
 .movie-poster {

@@ -31,13 +31,12 @@ class Landing extends Component {
   render() {
     return (
 
-      <div>
-
+      <div id="landing">
         <div>
-          <h1>Matchflix</h1>
           <img
             id="logo"
-            src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/f2357447098721.5873f49f96f1f.png"
+            // src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/f2357447098721.5873f49f96f1f.png"
+            src="../assets/logo.png"
             alt="Matchflix logo"
           />
         </div>
