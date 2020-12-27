@@ -1,8 +1,11 @@
 #logo {
-  /* height: 100px; */
-  width: 50%;
+  height: 100px;
 }
 
-#test {
-  color: red;
+.movie {
+  border: 1px solid black;
+}
+
+.movie-poster {
+  height: 500px;
 }
