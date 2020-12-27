@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import { Switch, Route } from 'react-router-dom';
 import Landing from './Landing.jsx';
 import Movie from './Movie.jsx';
-
+import '../styles.css';
 
 class App extends Component {
     constructor(props) {
