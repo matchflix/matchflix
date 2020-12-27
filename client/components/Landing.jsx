@@ -4,27 +4,32 @@ import '../styles.css';
 class Landing extends Component {
     constructor(props) {
       super(props);
-      // set up state
-      this.state = {url: 'www.google.com'};
+      // declare state object
+      // property url and value empty str
+      this.state= {url: ''};
+      this.handleSubmit = this.handleSubmit.bind(this);
     }
-    // onSubmit event handler
-     // 1) send a post request to server
-     // 2) when server responds with url, store this url in state
-    handleSubmit(event) {
+
+    handleSubmit(e) {
+      //send a post request to server
+      // send the selected genre in the request
       const genreSelection = document.querySelector('#genres').value;
+      console.log(genreSelection);
       const init = {
         method: 'POST',
-        // headers: {'Content-Type': 'application/json'},
-        // mode: 'cors',
-        // cache: 'no-cache',
-        body: JSON.stringify(genreSelection),
+        body: JSON.stringify({genreId: genreSelection}),
+        headers: {'Content-Type': 'application/json'}
       }
-      fetch('/', init).then((response) => response.json()).then((data) => console.log(data));
-      event.preventDefault();
+      fetch('/startsession', init)
+      .then((response) => response.json())
+      .then((data) => {
+        // use setState to reassign the value of url to the received url that the server sends back
+        // once setState is ran, the component renders
+        this.setState({url: data});
+      });
     }
 
     render() {
-
      return(
     
        <div>
@@ -35,9 +40,6 @@ class Landing extends Component {
         </div>
 
         <div id="startsession">
-          {/* form invokes eventHandler */}
-          {/* <form action="/startsession" method="POST"> */}
-          <form onSubmit={this.handleSubmit}>
             <label htmlFor="genres">Select a genre:</label>
             <select name="genres" id="genres">
               <option value="801369">Action</option>
@@ -52,15 +54,12 @@ class Landing extends Component {
               <option value="1492">Sci-Fi & Fantasy</option>
               <option value="46588">Thrillers</option>
             </select>
-            <input id="startsession" type="submit" value="Start Session"></input>
-          </form>
-          {/* URL component that only renders if state.url exists */}
-          {this.state.url !== '' && 
-          <div>
-          <p>Share this link: {this.state.url}</p>
-          <button type="button">Next</button>
-          </div>
-          }
+            <button id="startsession" type="button" onClick={this.handleSubmit}>Start Session</button>
+            {/* create a conditional- if the url is not an empty str, display the url to the page using a html tag */}
+            {
+            this.state.url && 
+            <p>Your url: <a href={this.state.url}>{this.state.url}</a></p>
+            }
         </div>
        </div>
      );
