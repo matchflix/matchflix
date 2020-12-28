@@ -16,7 +16,7 @@ app.use(express.urlencoded({extended: true}));
 app.use('/assets', express.static(path.join(__dirname, '../client/assets')));
 // TODO: added this because movies page calls GET http://localhost:3000/movies/dist/bundle.js
 // but this gets the production bundle.js instead of the development bundle.js 
-// app.use('*/dist', express.static(path.join(__dirname, '../dist')));
+app.use('*/dist', express.static(path.join(__dirname, '../dist')));
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/index.html'));
@@ -38,6 +38,10 @@ app.use('/startsession', session)
 // app.get('/', (req, res) => {
 //   return res.sendFile(path.resolve(__dirname, '../client/index.html'));
 // })
+
+app.get('/movies/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/index.html'));
+})
 
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
