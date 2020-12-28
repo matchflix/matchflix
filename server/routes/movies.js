@@ -21,6 +21,16 @@ router.get('/:id/api',
     res.status(200).json(res.locals.movies);
 })
 
+
+router.post('/:id', 
+  (req, res) => {
+  console.log(req.params.id)
+  // data from user input
+  console.log(req.body.votes)
+  res.status(200).end();
+})
+
+
 router.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../../client/index.html'));
 })

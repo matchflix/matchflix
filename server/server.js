@@ -8,6 +8,7 @@ const session = require('./routes/session');
 const movies = require('./routes/movies');
 const result = require('./routes/result');
 
+
 // parse request body
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));

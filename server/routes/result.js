@@ -5,10 +5,10 @@ const router = express.Router();
 
 // get request from client to fetch result
 router.get('/:id',
-  controller.calculateWinner,
+  //controller.calculateWinner,
   controller.winningMovieData,
   (res, req) => {
-    res.statusCode(200).end();
+    res.statusCode(200).json();
   }
 )
 
