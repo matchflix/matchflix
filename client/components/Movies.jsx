@@ -7,9 +7,11 @@ class Movies extends Component {
     super(props);
     this.state = {
         movies: [],
-        votes: []
+        votes: [],
+        hasBeenSubmitted: false
     }
     this.handleVote = this.handleVote.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   // component did mount. Using React Router, this is only called the first time you render Movies.
@@ -121,9 +123,27 @@ class Movies extends Component {
     this.setState({votes: newVotes});
   }
 
+  handleSubmit() {
+    // send post request with votes array
+    console.log('handle submit was called!');
+    console.log(this.state.votes);
+    const currentUrl = window.location.href;
+    const init = {
+      method: 'POST',
+      body: JSON.stringify({votes: this.state.votes}),
+      headers: { 'Content-Type': 'application/json' },
+    };
+    fetch(currentUrl, init)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('response received from server');
+        console.log(data);
+      })
+      .catch((err) => console.log(err));
+      this.setState({hasBeenSubmitted: true});
+  }
   // handleSubmit
     // check that all movies received vote
-    // send post request with votes array
     // gray out the submit button
     // show Everyone Finished? button
 
@@ -147,6 +167,19 @@ class Movies extends Component {
       <div id="movies">
         {movieComponentsArray}
         {/* submit votes button. onclick = handleSubmit */}
+        <button onClick={this.handleSubmit} id="button-submit-votes">
+            Submit votes
+        </button>
+        {this.state.hasBeenSubmitted && (
+            <div> 
+           <p> Is Everyone Finished? </p> 
+            <button>
+                Click Here to see Results
+            </button>
+            </div>
+        )
+        }
+
       </div>
     )
   }

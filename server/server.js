@@ -46,6 +46,14 @@ app.get('/movies/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/index.html'));
 })
 
+app.post('/movies/:id', (req, res) => {
+  console.log("sessionID:" + req.params.id);
+  console.log("votes array: " + req.body.votes);
+  // store this votesArray in the database
+  
+  res.status(200).send();
+})
+
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
 })
