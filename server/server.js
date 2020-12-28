@@ -38,6 +38,9 @@ app.use('/startsession', session)
 // app.get('/', (req, res) => {
 //   return res.sendFile(path.resolve(__dirname, '../client/index.html'));
 // })
+app.get('/movies/*/api', (req, res) => {
+  res.status(200).json([{Jaws: "info"}])
+})
 
 app.get('/movies/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/index.html'));
