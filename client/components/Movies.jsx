@@ -10,6 +10,7 @@ class Movies extends Component {
   // component did mount
     // send request to /movies/id/api, which responds back with array of 15 movie objects. 
     // set state.movies to be this array
+    // set fetched to be true
 
   // 
   render() {
