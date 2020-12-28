@@ -1,7 +1,8 @@
 const express = require('express'); 
-const router = express.Router();
 // require in controller
 const controller = require('../controller');
+const router = express.Router();
+
 
 
 /*
@@ -13,17 +14,12 @@ const controller = require('../controller');
 
 // recieve GET from frontend
 router.get('/movies/:id', 
-  // make GET to API for genre IDS
-  // controller.getGenreIds,
-  // Fetch genre string from DB and find corresponding ID from res.locals
-  //controller.getGenreFromDB,
+  controller.getGenre,
   // Use genre ID to make API call for movie IDS
-  controller.getMovieIds,
-  // Make API call for config info
-  // controller.getMovieImages,
+  controller.getMovies,
   (req, res) => {
     // send images back here
-    res.status(200).end();
+    res.status(200).send(res.locals.movies);
 })
 
 
