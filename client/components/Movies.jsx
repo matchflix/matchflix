@@ -5,11 +5,31 @@ import Movie from './Movie.jsx'
 class Movies extends Component {
   constructor(props) {
     super(props);
+    // state
+      // movies array
+      // votes array
   }
 
-  // component did mount
+  // component did mount. Using React Router, this is only called the first time you render Movies.
+  // not called again if you refresh page or go to a different /movies/id route. 
+  componentDidMount() {
     // send request to /movies/id/api, which responds back with array of 15 movie objects. 
+    console.log('component did mount!');
+    // const currentUrl = window.location.href + "/api";
+    // console.log(currentUrl);
+    fetch('/api')
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.log('ERROR: error occurred while getting movie data from server.'))
     // set state.movies to be this array
+    // set fetched to be true
+  }
+
+  // handleSubmit
+    // check that all movies received vote
+    // send post request with votes array
+    // gray out the submit button
+    // show Everyone Finished? button
 
   // 
   render() {
@@ -24,9 +44,12 @@ class Movies extends Component {
       <div id="movies">
         <Movie title={title} poster={poster} description={description} year={year}/>
         <Movie title={title} poster={poster} description={description} year={year}/>
+        <Movie title={title} poster={poster} description={description} year={year}/>
+        {/* submit votes button. onclick = handleSubmit */}
       </div>
     )
   }
 }
 
 export default Movies;
+
