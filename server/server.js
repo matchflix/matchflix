@@ -24,12 +24,13 @@ app.get('/', (req, res) => {
 // route associated with our landing page and session generation
 app.use('/startsession', session);
 
-// // route to serve our second page, which will display and collect movie data
+// route to serve our second page, which will display and collect movie data
 app.use('/movies', movies);
 
+//route to serve our result page once users have inputted preferences
+app.use('/result', result)
 
 
-// app.use('/result/:id', result)
 // // create route to render second page, make sure ID matches. 
 // // TODO: attempt to serve back same page and use react router to display movies component. 
 // // the index.html is served to client, but then GET http://localhost:3000/movies/dist/bundle.js 

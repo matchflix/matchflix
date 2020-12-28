@@ -15,9 +15,10 @@ const router = express.Router();
 router.get('/:id/api', 
   controller.getGenre,
   controller.getMovies,
+  controller.addMovieData,
   (req, res) => {
     // send images back here
-    res.status(200).json({ movie: 'test' });
+    res.status(200).json(res.locals.movies);
 })
 
 router.get('/*', (req, res) => {
@@ -25,7 +26,6 @@ router.get('/*', (req, res) => {
 })
 
 // post request from client to record user data from movie page
-  // we want this data to look like this:
   
 
 module.exports = router;

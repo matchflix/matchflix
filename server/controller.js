@@ -7,7 +7,7 @@ const controller = {};
 
 
 /*
-  SESSION CONTROLLERS
+  SESSION MIDDLEWARE
 */
 
 // generate user ID for this group's session
@@ -29,6 +29,7 @@ controller.saveInDb = (req, res, next) => {
   try {
     const ID = res.locals.id;
     console.log('genre ID: ' + req.body.genreId)
+    console.log('req.body: ', req.body)
     const genre = req.body.genreId;
     const userDataQuery = `INSERT INTO public.user_session (session_id, genre) VALUES ('${ID}', '${genre}');`
     pool.query(userDataQuery)
@@ -82,9 +83,10 @@ controller.getGenre = (req, res, next) => {
 controller.getMovies = (req, res, next) => {
   // only 15 movies
   // API query no longer works with template literal for genreID
-  // I think the genre IDs might not be matching up becuase no results are getting returned, 48586 from front end finds no results but 5763 did
+  // I think the genre IDs might not be matching up becuase no results are getting returned, 48586 from front end finds no results but 5763 did (id we sourced ourselves)
   const genreID = res.locals.genreID;
-  fetch(`https://unogsng.p.rapidapi.com/search?newdate=2010-01-01&genrelist=${genreID}&start_year=2010&orderby=rating&limit=20&subtitle=english&countrylist=78%2C46&audio=english&end_year=2020`, {
+  console.log('from movie call: ', genreID)
+  fetch(`https://unogsng.p.rapidapi.com/search?newdate=2000-01-02&genrelist=${genreID}&start_year=1972&limit=15&subtitle=english&countrylist=78%2C46&audio=english&offset=0&end_year=2020`, {
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-key": "28101c0940mshff52c3835fd444ep17aa5cjsne499e7e090a3",
@@ -93,14 +95,14 @@ controller.getMovies = (req, res, next) => {
   })
   .then((response) => response.json())
   .then((data) => {
-    console.log(data)
-    const movies = {};
+    const movies = [];
     data.results.forEach(el => {
-      movies[el.title] = {
+      movies.push({
+        name: el.title,
         year: el.year,
         image: el.img,
         description: el.synopsis,
-      }
+      })
     });
     res.locals.movies = movies;
     return next();
@@ -110,16 +112,53 @@ controller.getMovies = (req, res, next) => {
   })
 }
 
+controller.addMovieData = (req, res, next) => {
+  try {
+    // insert movie data into the user_session table where id is equal to req.params.id
+    const ID = req.params.id;
+    const movieData = JSON.stringify(res.locals.movies);
+    const userDataQuery = `UPDATE public.user_session SET movie_data = '${movieData}' WHERE (session_id='${ID}');`
+    pool.query(userDataQuery)
+      .then(() => {
+        return next();
+      })
+      .catch(err => {
+        console.log('Could not save data: ', err)
+      })
+  } catch(err) {
+    console.log(err)
+  }
+}
+
 
 /*
   RESULT MIDDLEWARE
 */
+
+controller.winningMovieData = (req, res, next) => {
+  try {
+    const ID = req.params.id;
+    const userDataQuery = `SELECT movie_data FROM user_session WHERE session_id='${ID}';`
+    pool.query(userDataQuery)
+    .then((response) => {
+      console.log(JSON.parse(response.rows[0].movie_data))
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  } catch(err) {
+    console.log('could not get winning movie data', err)
+  }
+}
 
 // once all users finish, retrieve user data from the movie table in DB
   // conditional so that if a user goes to the result route and not all data is collected, it redirects them to a waiting room page
   // SQL query for above data
 
 // calculate the winning movie based off retrieved data and send back to front end
+
+
+// user 1 1 -15 
 
 
 
