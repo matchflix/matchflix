@@ -33,6 +33,8 @@ module.exports = {
     publicPath: '/dist/',
     proxy: {
       '*': 'http://localhost:3000'
-    }
+    },
+    // serves index.html at unknown urls
+    historyApiFallback: true,
   }
 };

@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cross-env NODE_ENV=production npx nodemon server/server.js",
     "build": "cross-env NODE_ENV=production npx webpack",
-    "dev": "cross-env NODE_ENV=development concurrently \"webpack-dev-server --open\" \"npx nodemon server/server.js\""
+    "dev": "cross-env NODE_ENV=development concurrently \"webpack-dev-server --open --history-api-fallback\" \"npx nodemon server/server.js\""
   },
   "keywords": [],
   "author": "",
