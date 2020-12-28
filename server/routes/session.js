@@ -19,7 +19,7 @@ router.post('/',
       redirect either to a success page or the movies page
       send the url with the post response as well
     */
-    res.status(400).json(res.locals.url);
+    res.status(200).json(res.locals.url);
 });
 
 module.exports = router;

@@ -1,4 +1,5 @@
 const express = require('express'); 
+const path = require('path');
 // require in controller
 const controller = require('../controller');
 const router = express.Router();
@@ -11,12 +12,16 @@ const router = express.Router();
 */
 
 // get request to API for movie data
-router.get('/movies/:id', 
+router.get('/:id/api', 
   controller.getGenre,
   controller.getMovies,
   (req, res) => {
     // send images back here
-    res.status(200).send(res.locals.movies);
+    res.status(200).json({ movie: 'test' });
+})
+
+router.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../client/index.html'));
 })
 
 // post request from client to record user data from movie page

@@ -28,8 +28,8 @@ controller.generateSessionID = (req, res, next) => {
 controller.saveInDb = (req, res, next) => {
   try {
     const ID = res.locals.id;
-    // Have the front send send over just the genre ID instead of the genre as a string for easier API querying
-    const genre = req.body;
+    console.log('genre ID: ' + req.body.genreId)
+    const genre = req.body.genreId;
     const userDataQuery = `INSERT INTO public.user_session (session_id, genre) VALUES ('${ID}', '${genre}');`
     pool.query(userDataQuery)
       .then((result) => {
@@ -47,7 +47,7 @@ controller.saveInDb = (req, res, next) => {
 controller.generateURL = (req, res, next) => {
   try {
     // use the id stored in res.locals to generate a URL for users
-    const URL = `http://localhost:3000/movies/${res.locals.id}`
+    const URL = `http://localhost:8080/movies/${res.locals.id}`
     // store this url in res.locals
     res.locals.url = URL;
     next();
@@ -64,12 +64,13 @@ controller.generateURL = (req, res, next) => {
 
 // query data base for the genre ID associated with current group's ID
 controller.getGenre = (req, res, next) => {
+  console.log('genre middleware')
   const id = req.params.id;
   try {
-    const dataQuery = `SELECT genre FROM user_session WHERE session_id=${id}`;
+    const dataQuery = `SELECT genre FROM user_session WHERE session_id='${id}'`;
     pool.query(dataQuery)
     .then((response) => {
-      res.locals.genreID = response;
+      res.locals.genreID = response.rows[0].genre;
       return next();
     })
   } catch(err) {
@@ -80,6 +81,8 @@ controller.getGenre = (req, res, next) => {
 // fetch movie title, synopsis, and image from the external API
 controller.getMovies = (req, res, next) => {
   // only 15 movies
+  // API query no longer works with template literal for genreID
+  // I think the genre IDs might not be matching up becuase no results are getting returned, 48586 from front end finds no results but 5763 did
   const genreID = res.locals.genreID;
   fetch(`https://unogsng.p.rapidapi.com/search?newdate=2010-01-01&genrelist=${genreID}&start_year=2010&orderby=rating&limit=20&subtitle=english&countrylist=78%2C46&audio=english&end_year=2020`, {
 	"method": "GET",
@@ -90,6 +93,7 @@ controller.getMovies = (req, res, next) => {
   })
   .then((response) => response.json())
   .then((data) => {
+    console.log(data)
     const movies = {};
     data.results.forEach(el => {
       movies[el.title] = {

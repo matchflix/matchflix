@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
-// import { Switch, Route } from 'react-router-dom';
-import Landing from './Landing.jsx'
-
+import Landing from './Landing.jsx';
+import Movies from './Movies.jsx';
+import '../styles.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 class App extends Component {
     constructor(props) {
@@ -9,9 +15,20 @@ class App extends Component {
     }
     render() {
      return(
-       <div >
-         <Landing />
-       </div>
+       <Router>
+        <div >
+            <h1>Matchflix</h1>
+            <Link to='/movies/123'>Movies</Link>
+            <Switch>
+              <Route exact path='/'>
+                <Landing />
+              </Route>
+              <Route path='/movies'>
+                <Movies />
+              </Route>
+            </Switch>
+          </div>
+       </Router>
      );
     }
   }

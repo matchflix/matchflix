@@ -1,8 +1,17 @@
 #logo {
-  /* height: 100px; */
-  width: 50%;
+  height: 100px;
 }
 
-#test {
-  color: red;
+#landing, #movies {
+  border: 5px solid black;
+  margin: 10px;
+}
+
+.movie {
+  border: 1px solid black;
+  margin: 10px;
+}
+
+.movie-poster {
+  height: 500px;
 }
