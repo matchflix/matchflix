@@ -10,7 +10,7 @@ const controller = {};
   SESSION CONTROLLERS
 */
 
-// add middleware to generate user ID
+// generate user ID for this group's session
 controller.generateSessionID = (req, res, next) => {
   try {
     // generate a MORE UNIQUE ID
@@ -24,9 +24,9 @@ controller.generateSessionID = (req, res, next) => {
   }
 }
 
+// SQL command to save session ID from res.locals and genre from req.body in the user_session SQL table
 controller.saveInDb = (req, res, next) => {
   try {
-    // write out SQL command to save session ID from res.locals and genre from req.body
     const ID = res.locals.id;
     // Have the front send send over just the genre ID instead of the genre as a string for easier API querying
     const genre = req.body;
@@ -43,7 +43,7 @@ controller.saveInDb = (req, res, next) => {
   }
 }
 
-// add middleware to generate URL
+// generate the URL for other user's to join this session
 controller.generateURL = (req, res, next) => {
   try {
     // use the id stored in res.locals to generate a URL for users
@@ -59,11 +59,11 @@ controller.generateURL = (req, res, next) => {
 
 
 /*
-  MOVIE CONTROLLERS
+  MOVIE MIDDLEWARE
 */
 
+// query data base for the genre ID associated with current group's ID
 controller.getGenre = (req, res, next) => {
-  // query data base for the genre ID associated with current group's ID
   const id = req.params.id;
   try {
     const dataQuery = `SELECT genre FROM user_session WHERE session_id=${id}`;
@@ -77,10 +77,10 @@ controller.getGenre = (req, res, next) => {
   };
 }
 
-
+// fetch movie title, synopsis, and image from the external API
 controller.getMovies = (req, res, next) => {
+  // only 15 movies
   const genreID = res.locals.genreID;
-  // use template literal to insert genre id at genrelist=nnnn
   fetch(`https://unogsng.p.rapidapi.com/search?newdate=2010-01-01&genrelist=${genreID}&start_year=2010&orderby=rating&limit=20&subtitle=english&countrylist=78%2C46&audio=english&end_year=2020`, {
 	"method": "GET",
 	"headers": {
@@ -105,6 +105,17 @@ controller.getMovies = (req, res, next) => {
     console.error(err);
   })
 }
+
+
+/*
+  RESULT MIDDLEWARE
+*/
+
+// once all users finish, retrieve user data from the movie table in DB
+  // conditional so that if a user goes to the result route and not all data is collected, it redirects them to a waiting room page
+  // SQL query for above data
+
+// calculate the winning movie based off retrieved data and send back to front end
 
 
 
