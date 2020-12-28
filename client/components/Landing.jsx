@@ -16,6 +16,7 @@ class Landing extends Component {
     const genreSelection = document.querySelector('#genres').value;
     const init = {
       method: 'POST',
+      // deleted stringify to check double entry 
       body: JSON.stringify({ genreId: genreSelection }),
       headers: { 'Content-Type': 'application/json' },
     };
@@ -44,7 +45,7 @@ class Landing extends Component {
         <div id="startsession">
           <label htmlFor="genres">Select a genre:</label>
           <select name="genres" id="genres">
-            <option value="801369">Action</option>
+            <option value="801362">Action</option>
             <option value="4698">Animation</option>
             <option value="48586">Children & Family</option>
             <option value="31694">Comedy</option>
@@ -54,7 +55,7 @@ class Landing extends Component {
             <option value="8711">Horror</option>
             <option value="875">Indie</option>
             <option value="1492">Sci-Fi & Fantasy</option>
-            <option value="46588">Thrillers</option>
+            <option value="43048">Thrillers</option>
           </select>
           <button id="startsession" type="button" onClick={this.handleSubmit}>Start Session</button>
           {/* if the url is not an empty str, display the url to the page using a html tag */}

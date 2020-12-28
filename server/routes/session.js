@@ -1,7 +1,8 @@
 const express = require('express'); 
-const router = express.Router();
 // require in controller
 const controller = require('../controller');
+const router = express.Router();
+
 
 /*
   This route will he activated when the frontend sends
