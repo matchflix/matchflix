@@ -18,7 +18,6 @@ class App extends Component {
        <Router>
           <div id="main">
             <h1>Matchflix</h1>
-              <Link to='/movies/123'>Movies</Link>
               <Switch>
                 <Route exact path='/'>
                   <Landing />

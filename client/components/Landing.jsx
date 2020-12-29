@@ -65,7 +65,7 @@ class Landing extends Component {
             this.state.url
             && (
             <p>
-              Your url:
+              Here is your link. Share with your friends so they can join the session: <br/>
               {' '}
               <a className="links" href={this.state.url}>{this.state.url}</a>
             </p>
