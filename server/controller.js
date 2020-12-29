@@ -39,7 +39,7 @@ controller.saveInDb = (req, res, next) => {
 controller.generateURL = (req, res, next) => {
   try {
     // use the id stored in res.locals to generate a URL for users
-    const URL = `http://localhost:3000/movies/${res.locals.id}`
+    const URL = `http://localhost:8080/movies/${res.locals.id}`
     // store this url in res.locals
     res.locals.url = URL;
     next();
