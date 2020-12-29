@@ -28,8 +28,8 @@ controller.generateSessionID = (req, res, next) => {
 controller.saveInDb = (req, res, next) => {
   try {
     const ID = res.locals.id;
-    console.log('genre ID: ' + req.body.genreId)
-    console.log('req.body: ', req.body)
+    // console.log('genre ID: ' + req.body.genreId)
+    // console.log('req.body: ', req.body)
     const genre = req.body.genreId;
     const userDataQuery = `INSERT INTO public.user_session (session_id, genre) VALUES ('${ID}', '${genre}');`
     pool.query(userDataQuery)
@@ -141,7 +141,8 @@ controller.winningMovieData = (req, res, next) => {
     const userDataQuery = `SELECT movie_data FROM user_session WHERE session_id='${ID}';`
     pool.query(userDataQuery)
     .then((response) => {
-      console.log(JSON.parse(response.rows[0].movie_data))
+      console.log(JSON.parse(response.rows[0].movie_data));
+      return next();
     })
     .catch(err => {
       console.log(err)
