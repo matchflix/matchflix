@@ -16,18 +16,17 @@ class App extends Component {
     render() {
      return(
        <Router>
-        <div >
+          <div id="main">
             <h1>Matchflix</h1>
-            <Link to='/movies/123'>Movies</Link>
-            <Switch>
-              <Route exact path='/'>
-                <Landing />
-              </Route>
-              <Route path='/movies'>
-                <Movies />
-              </Route>
-            </Switch>
-          </div>
+              <Switch>
+                <Route exact path='/'>
+                  <Landing />
+                </Route>
+                <Route path='/movies'>
+                  <Movies />
+                </Route>
+              </Switch>
+            </div>
        </Router>
      );
     }
