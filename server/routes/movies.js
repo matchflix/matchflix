@@ -22,7 +22,10 @@ router.get('/:id/api',
 })
 
 // post request for client to send each user's votes
-router.post('/:id', 
+router.post('/:id',
+  // save the user votes in the DB
+  controller.saveVotes,
+  // query the DB for a winner
   (req, res) => {
   console.log(req.params.id)
   // data from user input
