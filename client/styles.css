@@ -90,15 +90,29 @@ h1 {
 }
 
 #movies {
-  border: 4px solid black;
+  /* border: 1px solid rgb(152, 151, 151); */
   margin: 10px;
+  /* display: flex; */
+  /* align-items: center; */
+  /* text-align: center; */
+  /* width: 75%; */
+  /* align-self: center; */
 }
 
 .movie {
-  border: 1px solid black;
-  margin: 10px;
+  border: 2px solid rgb(165, 162, 162);
+  margin: 0 auto;
+  font-family: 'Oxygen', sans-serif;
+  color: #fcfcfc;
+  width: 60%;
+  text-align: center;
+  padding: 20px;
 }
 
 .movie-poster {
   height: 500px;
+}
+
+.thumbs-up {
+  color: white;
 }

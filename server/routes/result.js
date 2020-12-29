@@ -7,8 +7,8 @@ const router = express.Router();
 router.get('/:id',
   //controller.calculateWinner,
   controller.winningMovieData,
-  (res, req) => {
-    res.statusCode(200).json();
+  (req, res) => {
+    res.status(200).json("https://lh3.googleusercontent.com/proxy/mwCmkBj-0qNXJIPHLRZKGr3JLnz0nDwsVAqvQ-372loCDY0JhnQKs1FTB9QVJARnakP4TepVY1Z6-EzeME3THFREVYxjJvOZdY6qIlOanFv8aK1faBR5WYWtKbCgefjweRqq5tSZlA");
   }
 )
 

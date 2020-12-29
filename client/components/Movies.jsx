@@ -8,10 +8,12 @@ class Movies extends Component {
     this.state = {
         movies: [],
         votes: [],
-        hasBeenSubmitted: false
+        hasBeenSubmitted: false,
+        winnerImage: ''
     }
     this.handleVote = this.handleVote.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSeeResults = this.handleSeeResults.bind(this);
   }
 
   // component did mount. Using React Router, this is only called the first time you render Movies.
@@ -120,8 +122,8 @@ class Movies extends Component {
 
   handleSubmit() {
     // send post request with votes array
-    console.log('handle submit was called!');
-    console.log(this.state.votes);
+    // console.log('handle submit was called!');
+    // console.log(this.state.votes);
     const currentUrl = window.location.href;
     const init = {
       method: 'POST',
@@ -136,6 +138,22 @@ class Movies extends Component {
       })
       .catch((err) => console.log(err));
       this.setState({hasBeenSubmitted: true});
+  }
+
+  handleSeeResults() {
+    console.log('handleSeeResults was called!');
+    const urlParts = window.location.pathname.split('/'); // ['movies', '4723']
+    const sessionId = urlParts[urlParts.length - 1];
+    console.log(sessionId);
+    // localhost:8000/movies/4723
+    // '/result/4723'
+    fetch(`${window.location.origin}/result/${sessionId}`)
+      .then((res) => res.json())
+      .then((imageUrl) => {
+        console.log("imageUrl: " + imageUrl);
+        this.setState({winnerImage: imageUrl});
+      })
+      .catch((err) => console.log(err));
   }
 
   render() {
@@ -163,10 +181,14 @@ class Movies extends Component {
         {this.state.hasBeenSubmitted && (
             <div> 
            <p> Is Everyone Finished? </p> 
-            <button>
-                Click Here to see Results
+            <button onClick={this.handleSeeResults} id="button-see-results">
+                Click To See Winner Below
             </button>
             </div>
+        )
+        }
+        {this.state.winnerImage && (
+          <img id="winner=image" src={this.state.movies[0]["image"]}/>
         )
         }
 
