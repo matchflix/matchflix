@@ -188,7 +188,7 @@ class Movies extends Component {
         )
         }
         {this.state.winnerImage && (
-          <img id="winner=image" src={this.state.winnerImage}/>
+          <img id="winner=image" src={this.state.movies[0]["image"]}/>
         )
         }
 
