@@ -21,7 +21,7 @@ router.get('/:id/api',
     res.status(200).json(res.locals.movies);
 })
 
-
+// post request for client to send each user's votes
 router.post('/:id', 
   (req, res) => {
   console.log(req.params.id)
@@ -30,12 +30,11 @@ router.post('/:id',
   res.status(200).end();
 })
 
-
+// serve html page for react router
 router.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../../client/index.html'));
 })
 
-// post request from client to record user data from movie page
   
 
 module.exports = router;
