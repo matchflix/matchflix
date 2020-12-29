@@ -89,7 +89,7 @@ controller.getMovies = (req, res, next) => {
   fetch(`https://unogsng.p.rapidapi.com/search?newdate=2000-01-02&genrelist=${genreID}&start_year=1972&limit=15&subtitle=english&countrylist=78%2C46&audio=english&offset=0&end_year=2020`, {
 	"method": "GET",
 	"headers": {
-		"x-rapidapi-key": "28101c0940mshff52c3835fd444ep17aa5cjsne499e7e090a3",
+		"x-rapidapi-key": "...",
 		"x-rapidapi-host": "unogsng.p.rapidapi.com"
 	}
   })
@@ -134,6 +134,36 @@ controller.addMovieData = (req, res, next) => {
 /*
   RESULT MIDDLEWARE
 */
+
+controller.saveVotes = (req, res, next) => {
+  try{
+    const votes = req.body.votes;
+    const ID = req.params.id;
+    const inputString = `UPDATE public.movies SET movie_1 = ${votes[0]}, 
+                                                  movie_2 = ${votes[1]}, 
+                                                  movie_3 = ${votes[2]}, 
+                                                  movie_4 = ${votes[3]}, 
+                                                  movie_5 = ${votes[4]}, 
+                                                  movie_6 = ${votes[5]}, 
+                                                  movie_7 = ${votes[6]}, 
+                                                  movie_8 = ${votes[7]}, 
+                                                  movie_9 = ${votes[8]}, 
+                                                  movie_10 = ${votes[9]}, 
+                                                  movie_11 = ${votes[10]}, 
+                                                  movie_12 = ${votes[11]}, 
+                                                  movie_13 = ${votes[12]}, 
+                                                  movie_14 = ${votes[13]}, 
+                                                  movie_15 = ${votes[14 ]},
+                                                  session = ${ID};` 
+    pool.query(inputString)
+    .then((response) => {
+      console.log('saved votes in DB!')
+      return next();
+    })                                                 
+  } catch(err) {
+    console.log('could not update DB with votes:', err)
+  }
+}
 
 controller.winningMovieData = (req, res, next) => {
   try {
