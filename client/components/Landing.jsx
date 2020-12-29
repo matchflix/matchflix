@@ -30,9 +30,8 @@ class Landing extends Component {
 
   render() {
     return (
-
       <div id="landing">
-        <div>
+        <div id="logoContainer">
           <img
             id="logo"
             // src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/f2357447098721.5873f49f96f1f.png"
@@ -42,7 +41,7 @@ class Landing extends Component {
         </div>
 
         <div id="startsession">
-          <label htmlFor="genres">Select a genre:</label>
+          <label htmlFor="genres">Select a genre: </label>
           <select name="genres" id="genres">
             <option value="801369">Action</option>
             <option value="4698">Animation</option>
@@ -56,7 +55,10 @@ class Landing extends Component {
             <option value="1492">Sci-Fi & Fantasy</option>
             <option value="46588">Thrillers</option>
           </select>
-          <button id="startsession" type="button" onClick={this.handleSubmit}>Start Session</button>
+          <button id="submitButton" type="button" onClick={this.handleSubmit}>Start Session</button>
+          {/* <Button basic color='red'>
+            Red
+          </Button> */}
           {/* if the url is not an empty str, display the url to the page using a html tag */}
           {
             this.state.url
@@ -64,7 +66,7 @@ class Landing extends Component {
             <p>
               Your url:
               {' '}
-              <a href={this.state.url}>{this.state.url}</a>
+              <a className="links" href={this.state.url}>{this.state.url}</a>
             </p>
             )
             }

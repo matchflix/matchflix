@@ -1,9 +1,96 @@
-#logo {
-  height: 100px;
+/* @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed&family=Oxygen&display=swap');
+
+/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#b5032a+0,8f0222+56,6d0019+100 */
+
+body {
+  /* background: rgb(171, 170, 170); */
+  margin: 0;
+  background: #b5032a; /* Old browsers */
+  background: -moz-linear-gradient(top,  #b5032a 0%, #8f0222 56%, #6d0019 100%) fixed; /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #b5032a 0%,#8f0222 56%,#6d0019 100%) fixed; /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #b5032a 0%,#8f0222 56%,#6d0019 100%) fixed; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5032a', endColorstr='#6d0019',GradientType=0 ); /* IE6-9 */
+  /* height: 100%; */
+  /* background-repeat: no-repeat; */
+  /* background-attachment: fixed; */
 }
 
-#landing, #movies {
-  border: 5px solid black;
+html {
+  /* height: 100%; */
+  min-height: 100%;
+  margin: 0;
+  /* background-repeat: no-repeat; */
+  /* background-attachment: fixed; */
+}
+
+#mainContainer {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+#main {
+  /* display: flex; */
+  /* justify-content: center; */
+  /* width: 60%; */
+  text-align: center;
+  height: 100%;
+  width: 100%;
+}
+
+h1 {
+  text-align: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  color: #fcfcfc;
+  font-size: 500%;
+  text-shadow: 2px 2px #706060;
+  margin: 0;
+}
+
+#logo {
+  height: 250px;
+}
+
+#submitButton {
+  border-radius: 5px;
+  /* background: red; */
+  background: #6d0019;
+  /* font-family: 'Barlow Condensed', sans-serif; */
+  font-family: 'Oxygen', sans-serif;
+  color: #fcfcfc;
+  border: 1px solid white;
+  margin: 5px;
+}
+
+#genres {
+  width: 300 px;
+}
+
+#landing {
+  text-align: center;
+  /* border: 2.5px solid #d9d9d9; */
+  height: 100%;
+}
+
+#logoContainer {
+  /* margin: auto; */
+  text-align: center;
+  margin: 5px;
+}
+
+#startsession {
+  /* font-family: 'Barlow Condensed', sans-serif; */
+  font-family: 'Oxygen', sans-serif;
+  color: #fcfcfc;
+}
+
+.links {
+  color: white;
+}
+
+#movies {
+  border: 4px solid black;
   margin: 10px;
 }
 
